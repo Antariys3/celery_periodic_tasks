@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Калькулятор обмена курса</title>
+</head>
+<body>
+<h2>Калькулятор обмена курса</h2>
+<form method="post" action="{% url 'exchange_calculator' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Рассчитать</button>
+</form>
+</body>
+</html>
