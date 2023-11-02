@@ -20,8 +20,8 @@ from django.urls import path
 from exchange.views import exchange_rates, home, exchange_calculator
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', home, name='home'),
-    path('exchange_rates/', exchange_rates, name="exchange_rates"),
-    path('exchange_calculator/', exchange_calculator, name="exchange_calculator"),
+    path("admin/", admin.site.urls),
+    path("", home, name="home"),
+    path("exchange_rates/", exchange_rates, name="exchange_rates"),
+    path("exchange_calculator/", exchange_calculator, name="exchange_calculator"),
 ]

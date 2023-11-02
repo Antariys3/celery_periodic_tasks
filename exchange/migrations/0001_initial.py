@@ -6,20 +6,27 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Rate',
+            name="Rate",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('currency_from', models.CharField(max_length=3)),
-                ('currency_to', models.CharField(max_length=3)),
-                ('sell', models.DecimalField(decimal_places=4, max_digits=10)),
-                ('buy', models.DecimalField(decimal_places=4, max_digits=10)),
-                ('provider', models.CharField(max_length=50)),
-                ('date', models.DateField(auto_now=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("currency_from", models.CharField(max_length=3)),
+                ("currency_to", models.CharField(max_length=3)),
+                ("sell", models.DecimalField(decimal_places=4, max_digits=10)),
+                ("buy", models.DecimalField(decimal_places=4, max_digits=10)),
+                ("provider", models.CharField(max_length=50)),
+                ("date", models.DateField(auto_now=True)),
             ],
         ),
     ]

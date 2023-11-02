@@ -30,28 +30,40 @@ def exchange_rates(request):
 def exchange_calculator(request):
     if request.method == "GET":
         form = ExchangeCalculatorForm()
-        return render(request, 'exchange_calculator.html', {'form': form})
+        return render(request, "exchange_calculator.html", {"form": form})
 
     form = ExchangeCalculatorForm(request.POST)
     if form.is_valid():
-        amount = form.cleaned_data['amount']
-        currency_from = form.cleaned_data['currency_from']
-        currency_to = form.cleaned_data['currency_to']
+        amount = form.cleaned_data["amount"]
+        currency_from = form.cleaned_data["currency_from"]
+        currency_to = form.cleaned_data["currency_to"]
 
         if currency_from == "UAH":
-            rate = Rate.objects.filter(currency_from=currency_to, currency_to=currency_from).order_by('-sell').first()
+            rate = (
+                Rate.objects.filter(
+                    currency_from=currency_to, currency_to=currency_from
+                )
+                .order_by("-sell")
+                .first()
+            )
             best_course = rate.sell
             provider = rate.provider
             converted_amount = amount / best_course
 
-
         elif currency_from != "UAH":
-            rate = Rate.objects.filter(currency_from=currency_from, currency_to=currency_to).order_by('buy').first()
+            rate = (
+                Rate.objects.filter(
+                    currency_from=currency_from, currency_to=currency_to
+                )
+                .order_by("buy")
+                .first()
+            )
             best_course = rate.buy
             provider = rate.provider
             converted_amount = amount * best_course
 
         return HttpResponse(
-            f"При лучшем курсе {best_course} от {provider}, полученная суммы: {converted_amount:.2f} {currency_to}")
+            f"При лучшем курсе {best_course} от {provider}, полученная суммы: {converted_amount:.2f} {currency_to}"
+        )
 
-    return render(request, 'exchange_calculator.html', {'form': form})
+    return render(request, "exchange_calculator.html", {"form": form})

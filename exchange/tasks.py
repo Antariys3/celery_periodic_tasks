@@ -36,7 +36,9 @@ def pull_rate():
             )
             print("Created euro exchange rate with ID", eur.id)
 
-        if provider_class.name == "monobank":  # added a pause of 31 seconds because the monobank blocks the API
+        if (
+            provider_class.name == "monobank"
+        ):  # added a pause of 31 seconds because the monobank blocks the API
             time.sleep(31)
 
         provider_usd = provider_class("USD", "UAH")
