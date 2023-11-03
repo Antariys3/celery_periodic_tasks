@@ -122,7 +122,3 @@ class VKurseProvider(ProviderBase):
 
 
 PROVIDERS = [MonoProvider, PrivatbankProvider, NationalBankProvider, VKurseProvider]
-
-# if __name__ == "__main__":
-#     provider = VKurseProvider("EUR", "UAH")
-#     print(provider.get_rate())

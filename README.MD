@@ -14,7 +14,6 @@ docker run -d -p 5672:5672 rabbitmq
 
 ```
 celery -A celery_periodic_tasks beat
-
 ```
 
 4. Run worker process.
