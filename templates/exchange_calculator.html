@@ -1,21 +1,12 @@
-{% load bootstrap5 %}
+{% extends "base.html" %}
 
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-<html>
-<head>
-    <title>Калькулятор обмена курса</title>
-    <style>
-        .custom-container {
-            max-width: 30%;
-            padding-left: 0;
-            padding-right: 0;
-        }
-    </style>
-</head>
-<body>
-<div class="container custom-container">
+{% block title %}Калькулятор обмена курса{% endblock %}
+
+{% block content %}
+    {% load bootstrap5 %}
+
+
+    <div class="container custom-container">
     <div class="row justify-content-start">
         <div class="col-md-auto">
             <h2>Калькулятор обмена курса</h2>
@@ -35,5 +26,4 @@
         </div>
     </div>
 </div>
-</body>
-</html>
+{% endblock %}

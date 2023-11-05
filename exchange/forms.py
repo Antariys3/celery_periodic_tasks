@@ -4,7 +4,7 @@ from django import forms
 class ExchangeCalculatorForm(forms.Form):
     amount = forms.DecimalField(label="Сумма", min_value=0, required=True)
     currency_from = forms.ChoiceField(
-        label="Из валюты", choices=[("USD", "USD"), ("EUR", "EUR"), ("UAH", "UAH")]
+        label="Из валюты", choices=[("UAH", "UAH"), ("USD", "USD"), ("EUR", "EUR")]
     )
     currency_to = forms.ChoiceField(
         label="В валюту", choices=[("USD", "USD"), ("EUR", "EUR"), ("UAH", "UAH")]
