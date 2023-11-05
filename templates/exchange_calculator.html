@@ -1,14 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Калькулятор обмена курса</title>
-</head>
-<body>
-<h2>Калькулятор обмена курса</h2>
-<form method="post" action="{% url 'exchange_calculator' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Рассчитать</button>
-</form>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Калькулятор обмена курса{% endblock %}
+
+{% block content %}
+    {% load bootstrap5 %}
+
+
+    <div class="container custom-container">
+    <div class="row justify-content-start">
+        <div class="col-md-auto">
+            <h2>Калькулятор обмена курса</h2>
+            <form method="post" action="{% url 'exchange_calculator' %}" class="mb-3">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">Рассчитать</button>
+                {% endbuttons %}
+            </form>
+            {% if result %}
+                <div class="alert alert-success mt-3" role="alert">
+                    {{ result }} <br>
+                    {{ message }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
