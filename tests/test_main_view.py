@@ -43,12 +43,13 @@ def test_exchange_calculator_view_post_valid_data(client):
     assert "При лучшем курсе".encode("utf-8") in response.content
 
 
-# @pytest.mark.django_db
-# def test_exchange_calculator_with_mock_db(mock_rate_filter):
-#     with mock_rate_filter:
-#         request_data = {"amount": 100, "currency_from": "UAH", "currency_to": "USD"}
-#         request = RequestFactory().post("/", request_data)
-#         response = exchange_calculator(request)
-#
-#     response_body = response.content.decode("utf-8")
-#     assert response_body == "37.85"
+@pytest.mark.django_db
+def test_exchange_calculator_with_mock_db(mock_rate_filter):
+    with mock_rate_filter:
+        request_data = {"amount": 100, "currency_from": "UAH", "currency_to": "USD"}
+        request = RequestFactory().post("/", request_data)
+        response = exchange_calculator(request)
+
+    response_body = response.content.decode("utf-8")
+    expected_result = "При лучшем курсе 39.80 от monobank, полученная суммы: 2.51 USD"
+    assert response_body == expected_result
