@@ -46,7 +46,6 @@ def exchange_calculator(request):
                 .order_by("-sell")
                 .first()
             )
-            best_course = rate.buy
             best_course = rate.sell
             provider = rate.provider
             converted_amount = amount / best_course
