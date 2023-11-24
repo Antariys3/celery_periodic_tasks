@@ -61,9 +61,9 @@ def exchange_calculator(request):
             best_course = rate.buy
             provider = rate.provider
             converted_amount = amount * best_course
-
         return HttpResponse(
-            f"При лучшем курсе {best_course} от {provider}, полученная суммы: {converted_amount:.2f} {currency_to}"
+            f"При лучшем курсе {best_course:.2f} от {provider}, полученная "
+            f"суммы: {converted_amount:.2f} {currency_to}"
         )
 
     return render(request, "exchange_calculator.html", {"form": form})

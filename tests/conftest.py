@@ -22,13 +22,7 @@ from exchange.models import Rate
 #             order_by=Mock(return_value=Mock(first=Mock(side_effect=mock_data)))
 #         ),
 #     )
-
-
-@pytest.fixture
-def mock_rate_filter():
-    mock_rates = [
-        Mock(spec=Rate, **rate_data)
-        for rate_data in [
+rates_list = [
             {
                 "currency_from": "EUR",
                 "currency_to": "UAH",
@@ -168,11 +162,30 @@ def mock_rate_filter():
                 "date": "2023-11-02",
             },
         ]
+
+
+
+def mock_rates_generator():
+    """
+    List of Mocks for each rate
+    """
+
+    return [
+        Mock(spec=Rate, **rate_data)
+        for rate_data in rates_list
     ]
+
+
+@pytest.fixture
+def mock_rate_filter():
+    mock_rates = mock_rates_generator()
 
     return patch(
         "exchange.views.Rate.objects.filter",
         return_value=Mock(
-            order_by=Mock(return_value=Mock(first=Mock(side_effect=mock_rates)))
+            order_by=Mock(
+                return_value=Mock(
+                    first=Mock(
+                        side_effect=mock_rates)))
         ),
     )
