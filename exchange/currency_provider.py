@@ -112,7 +112,7 @@ class VKurseProvider(ProviderBase):
 
         if currency_data:
             value = SellBuy(
-                sell=float(currency_data['sale']), buy=float(currency_data['buy'])
+                sell=float(currency_data["sale"]), buy=float(currency_data["buy"])
             )
             return value
 
