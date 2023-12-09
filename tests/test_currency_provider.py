@@ -2,7 +2,13 @@ from unittest.mock import MagicMock
 
 import responses
 
-from exchange.currency_provider import MonoProvider, SellBuy, PrivatbankProvider, NationalBankProvider, VKurseProvider
+from exchange.currency_provider import (
+    MonoProvider,
+    SellBuy,
+    PrivatbankProvider,
+    NationalBankProvider,
+    VKurseProvider,
+)
 
 
 def test_mono_currency_provider():
@@ -48,6 +54,7 @@ def test_privatbank_provider_with_data():
     provider = PrivatbankProvider("USD", "UAH")
     rate = provider.get_rate()
     assert rate == SellBuy(sell=30.0, buy=30.0)
+
 
 @responses.activate
 def test_nationalbank_provider_with_data():

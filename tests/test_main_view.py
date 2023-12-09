@@ -43,13 +43,31 @@ def test_exchange_calculator_view_post_valid_data(client):
     assert "При лучшем курсе".encode("utf-8") in response.content
 
 
+TESTDATA = [
+    (
+        {"amount": 1000, "currency_from": "UAH", "currency_to": "EUR"},
+        "При лучшем курсе 40.25 от privatbank, полученная сумма: 24.84 EUR",
+    ),
+    (
+        {"amount": 100, "currency_from": "EUR", "currency_to": "UAH"},
+        "При лучшем курсе 38.23 от NationalBank, полученная сумма: 3823.11 UAH",
+    ),
+    (
+        {"amount": 1000, "currency_from": "UAH", "currency_to": "USD"},
+        "При лучшем курсе 37.85 от VKurse, полученная сумма: 26.42 USD",
+    ),
+    (
+        {"amount": 100, "currency_from": "USD", "currency_to": "UAH"},
+        "При лучшем курсе 36.24 от monobank, полученная сумма: 3624.00 UAH",
+    ),
+]
+
+
+@pytest.mark.parametrize("request_data, expected_result", TESTDATA)
 @pytest.mark.django_db
-def test_exchange_calculator_with_mock_db(mock_rate_filter):
-    with mock_rate_filter:
-        request_data = {"amount": 1000, "currency_from": "UAH", "currency_to": "EUR"}
-        request = RequestFactory().post("/", request_data)
-        response = exchange_calculator(request)
+def test_exchange_calculator(request_data, expected_result):
+    request = RequestFactory().post("/", request_data)
+    response = exchange_calculator(request)
 
     response_body = response.content.decode("utf-8")
-    expected_result = "При лучшем курсе 39.80 от monobank, полученная сумма: 25.13 EUR"
     assert response_body == expected_result
